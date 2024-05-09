@@ -1,0 +1,11 @@
+<svg width="96" height="96" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_6">
+   <path id="svg_1" class="colorStroke000000 svgStroke" d="m52.68519,85.62963l-27.5,0c-8.2843,0 -15,-6.7157 -15,-15l0,-42c0,-8.2843 6.7157,-15 15,-15l45,0c8.2843,0 15,6.7157 15,15l0,27m-74,-21l74,0m-55,-26l0,10m36,-10l0,10m1,55l18,0l-18,0z" stroke-width="5" stroke-linecap="round" stroke="#f3f3f3"/>
+   <line stroke="#f3f3f3" stroke-linecap="round" id="svg_4" y2="79.37488" x2="73.34842" y1="74.03339" x1="67.87499" stroke-width="4" fill="none"/>
+   <path id="svg_5" d="m67.73333,73.46667l5.46667,-6" opacity="undefined" stroke-linecap="round" stroke-width="4" stroke="#f3f3f3" fill="none"/>
+  </g>
+ </g>
+</svg>
