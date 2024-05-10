@@ -31,7 +31,7 @@ const SideNav = () => {
     return (
     <div
       id="sideNav"
-      className="w-[170px] md:w-[210px] lg:w-[260] xl:w-[300px] h-full bg-background relative pt-5 "
+      className="w-[170px] md:w-[210px] lg:w-[260] xl:w-[300px] h-full bg-background relative pt-5 select-none"
     >
       {tabs.map(({ label, icon, route }, index) => {
          return (<Tab key={index} label={label} route={route} icon={icon} />)

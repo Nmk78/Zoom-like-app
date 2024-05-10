@@ -8,8 +8,9 @@ const streamSecret = process.env.STREAM_SECRET_KEY;
 
 export const tokenProvider = async () => {
   const user = await currentUser(); /// Clerk way to get user in server side
+  // console.log("🚀 ~ tokenProvider ~ user:", user)
 
-  if (!user) throw new Error("Unauthenticated");
+  if (!user){ throw new Error("Unauthenticated")};
   if (!apiKey) throw new Error("API key is missing");
   if (!streamSecret) throw new Error("Stream secret is missing");
 

@@ -22,8 +22,8 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
-
-const router = useRouter()
+  const router = useRouter();
+  const client = useStreamVideoClient();
 
   const { isLoaded, isSignedIn, user } = useUser();
   const [initialValues, setInitialValues] = useState({
@@ -32,8 +32,8 @@ const router = useRouter()
     meetingLink: "",
   });
 
-  const [call, setCall] = useState();
-  const client = useStreamVideoClient();
+  const [loading, setLoading] = useState(false);
+  const [call, setCall] = useState();  
   const { toast } = useToast();
 
   if (!isLoaded || !isSignedIn) {
@@ -41,7 +41,11 @@ const router = useRouter()
   }
 
   const createMeeting = async () => {
-    if (!user || !client) return;
+    if (!user || !client) {
+      console.log("🚀 ~ createMeeting ~ user :", user ,"client :", client)
+      
+      return;
+    }
 
     try {
       const call = client.call("default", crypto.randomUUID()); // Default was Video + Audio call
@@ -72,9 +76,12 @@ const router = useRouter()
     }
   };
 
-  const handler = async()=>{
-    await createMeeting()
-  }
+  const handler = async () => {
+    console.log("modal handler run");
+    setLoading(true);
+    await createMeeting();
+    setLoading(false);
+  };
   return (
     <Dialog open={isOpen} onOpenChange={onClose} className="text-gray-100">
       <DialogContent className="gap-y-5">
@@ -89,20 +96,20 @@ const router = useRouter()
             <Input type="link" id="link" />
           </div>
         )}
-{(type === "instantMeeting" || type === "scheduleMeeting") && (
-  <div>
-    <div className="text-gray-100">
-      <Label htmlFor="title" className="mb-5">
-        Title
-      </Label>
-      <Input id="Title" />
-    </div>
-    <div className="text-gray-100">
-      <Label htmlFor="desc">Description</Label>
-      <Textarea id="desc" />
-    </div>
-  </div>
-)}
+        {(type === "instantMeeting" || type === "scheduleMeeting") && (
+          <div>
+            <div className="text-gray-100">
+              <Label htmlFor="title" className="mb-5">
+                Title
+              </Label>
+              <Input id="Title" />
+            </div>
+            <div className="text-gray-100">
+              <Label htmlFor="desc">Description</Label>
+              <Textarea id="desc" />
+            </div>
+          </div>
+        )}
 
         {type == "scheduleMeeting" && (
           <DatePicker
@@ -116,7 +123,9 @@ const router = useRouter()
           />
         )}
 
-        <Button onClick={handler} className="text-gray-100">{buttonLabel || "undefined"}</Button>
+        <Button onClick={handler} className="text-gray-100">
+          {loading ? "loading" : buttonLabel}
+        </Button>
       </DialogContent>
     </Dialog>
   );

@@ -15,9 +15,7 @@ export default function RootLayout({ children }) {
           </header>
           <main className="w-full h-[94vh] flex justify-start items-center bg-foreground text-gray-100">
             <SideNav />
-            <StreamVideoProvider>
               {children}
-              </StreamVideoProvider>
           </main>
           <Toaster />
         </body>
