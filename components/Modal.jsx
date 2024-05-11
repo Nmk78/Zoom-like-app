@@ -33,7 +33,7 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [call, setCall] = useState();  
+  const [call, setCall] = useState();
   const { toast } = useToast();
 
   if (!isLoaded || !isSignedIn) {
@@ -42,13 +42,15 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
 
   const createMeeting = async () => {
     if (!user || !client) {
-      console.log("🚀 ~ createMeeting ~ user :", user ,"client :", client)
-      
+      console.log("🚀 ~ createMeeting ~ user :", user, "client :", client);
+
       return;
     }
+    setLoading(true);
 
     try {
       const call = client.call("default", crypto.randomUUID()); // Default was Video + Audio call
+      console.log("🚀 ~ createMeeting ~ call:", call);
       if (!call) {
         throw new Error("Failed to create meeting!");
       }
@@ -71,16 +73,16 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
       toast({
         title: "Meeting Created",
       });
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       throw new Error(error);
     }
   };
 
   const handler = async () => {
     console.log("modal handler run");
-    setLoading(true);
     await createMeeting();
-    setLoading(false);
   };
   return (
     <Dialog open={isOpen} onOpenChange={onClose} className="text-gray-100">
@@ -124,7 +126,7 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
         )}
 
         <Button onClick={handler} className="text-gray-100">
-          {loading ? "loading" : buttonLabel}
+          {loading ? "Loading" : buttonLabel}
         </Button>
       </DialogContent>
     </Dialog>

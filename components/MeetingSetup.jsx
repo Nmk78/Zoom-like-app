@@ -33,6 +33,7 @@ import {
   faMicrophoneAlt,
   faMicrophone,
   faMicrophoneLines,
+  faJoint,
 } from "@fortawesome/free-solid-svg-icons";
 import { cn } from "@/lib/utils";
 
@@ -98,14 +99,14 @@ const MeetingSetup = ({ setMeetingReady }) => {
   return (
     <div className=" flex flex-col items-center justify-center">
       {/* ... other components */}
-      <div>Video Preview</div>
+      {/* <div>Video Preview</div> */}
       <VideoPreview
         className="w-full h-full flex items-center justify-center"
         DisabledVideoPreview={DisabledVideoPreview}
         NoCameraPreview={NoCameraPreview}
         StartingCameraPreview={StartingCameraPreview}
       />
-      <div className="mt-3">
+      <div className="mt-3 flex justify-center items-center">
         <Button
           className={cn("w-20 mx-3 my-1", {
             "bg-red-600 hover:bg-red-700": cameraOpen,
@@ -127,8 +128,20 @@ const MeetingSetup = ({ setMeetingReady }) => {
             className=""
             color="#eaeaea"
           />
+        </Button>{" "}
+        <Button
+          className={cn("mx-3 my-1 bg-green-600 hover:bg-green-700")}
+          onClick={() => {
+            call.join();
+            setMeetingReady(true);
+          }}
+        >
+          {" "}
+          <span className="text-gray-100 text-xl font-semibold">
+            Join meeting
+          </span>
         </Button>
-        <DeviceSettings/>
+        <DeviceSettings />
       </div>
     </div>
   );

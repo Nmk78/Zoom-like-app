@@ -1,18 +1,22 @@
+"use client";
+import Meeting from "@/components/Meeting";
+import { useGetCallById } from "@/hooks/useGetCallById";
+import React from "react";
+import MeetingLayout from "./layout";
 
-"use client"
-import MeetingRoom from '@/components/Meeting';
-import { useGetCallById } from '@/hooks/useGetCallById';
-import React from 'react'
-
-const Meeting = ({params}) => {
+const MeetingPage = ({ params }) => {
   const { call, isCallLoading } = useGetCallById(params.id);
-  console.log("🚀 ~ Meeting ~ call:", call)
+  console.log("🚀 ~ Meeting ~ call:", call);
   return (
-    <div><MeetingRoom params={params}/></div>
-  )
-}
+    <MeetingLayout>
+      {/* <div id="meeting"> */}
+        <Meeting params={params} />
+      {/* </div> */}
+    </MeetingLayout>
+  );
+};
 
-export default Meeting
+export default MeetingPage;
 
 // "use client";
 // import { useUser } from "@clerk/nextjs";
@@ -21,16 +25,15 @@ export default Meeting
 // import { useGetCallById } from "@/hooks/useGetCallById";
 // import MeetingSetup from "@/components/MeetingSetup";
 
+// const Meeting = ({ params }) => {
 
-// const MeetingRoom = ({ params }) => {
-
-//     // console.log("🚀 ~ MeetingRoom ~ id:", id)
+//     // console.log("🚀 ~ Meeting ~ id:", id)
 
 //   const { user, isLoaded } = useUser();
 //     const {call, callLoading} = useGetCallById(params?.id)
 //     // const {call, callLoading} = useGetCallById(id)
-    
-//     console.log("🚀 ~ MeetingRoom ~ call:", call)
+
+//     console.log("🚀 ~ Meeting ~ call:", call)
 
 //   const [meetingReady, setMeetingReady] = useState(false);
 
@@ -58,7 +61,7 @@ export default Meeting
 // //     getCall();
 // //   }, [client, params?.id]);
 // // ///////
-// // console.log("🚀 ~ MeetingRoom ~ call:", call)
+// // console.log("🚀 ~ Meeting ~ call:", call)
 // if (!call) return (
 //   <p className="text-center text-3xl font-bold text-white">
 //     Call Not Found
@@ -74,4 +77,4 @@ export default Meeting
 //     </div>
 //   );
 // };
-// export default MeetingRoom;
+// export default Meeting;
