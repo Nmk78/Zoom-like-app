@@ -13,8 +13,8 @@ export const tabs = [
   },
   {
     icon: "/icons/upcoming.svg",
-    route: "/upcoming",
-    label: "Upcoming",
+    route: "/scheduled",
+    label: "Scheduled",
   },
   {
     icon: "/icons/previous.svg",
@@ -34,13 +34,13 @@ export const quickButtons = [
     icon: "/icons/plus.svg",
     type: "instantMeeting",
     label: "New Meeting",
-    buttonLabel: "Join Meeting",
+    buttonLabel: "Create Meeting",
   },
   {
     icon: "/icons/meeting-join.svg",
     type: "joiningMeeting",
     label: "Join Meeting",
-    buttonLabel: "Create Meeting",
+    buttonLabel: "Join Meeting",
   },
   {
     icon: "/icons/schedule.svg",

@@ -15,6 +15,7 @@ const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 const StreamVideoProvider = ({ children }) => {
   const [videoClient, setVideoClient] = useState();
   const { user, isLoaded } = useUser();
+  console.log("🚀 ~ StreamVideoProvider ~ user:", user)
 
   useEffect(() => {
     if (!isLoaded || !user) return;
@@ -24,7 +25,7 @@ const StreamVideoProvider = ({ children }) => {
       apiKey,
       user: {
         id: user?.id,
-        name: user?.name,
+        name: user?.fullName,
         image: user?.imageUrl,
       },
       tokenProvider,

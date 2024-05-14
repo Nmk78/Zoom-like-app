@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useToast } from "./ui/use-toast";
 import Modal from "./Modal";
+import "../app/globals.css";
 
 export default function Home() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -85,7 +86,7 @@ export default function Home() {
                     type,
                     buttonLabel,
                   });
-                  console.log(meetingType);
+                  console.log(type);
                 }}
               />
             );

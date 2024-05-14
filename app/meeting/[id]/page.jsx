@@ -6,7 +6,6 @@ import MeetingLayout from "./layout";
 
 const MeetingPage = ({ params }) => {
   const { call, isCallLoading } = useGetCallById(params.id);
-  console.log("🚀 ~ Meeting ~ call:", call);
   return (
     <MeetingLayout>
       {/* <div id="meeting"> */}

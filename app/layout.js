@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
             <header>
               <Nav />
             </header>{" "}
-            <main className="w-full h-[94vh] flex justify-start items-center bg-foreground text-gray-100">
+            <main className="w-full h-[94vh] flex justify-start items-start bg-foreground text-gray-100">
               <SideNav />
               {children}
             </main>
