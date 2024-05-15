@@ -3,16 +3,17 @@ import { useStreamVideoClient } from "@stream-io/video-react-sdk";
 import React, { useEffect, useState } from "react";
 
 const useGetCallsByUser = () => {
-  const { user } = useUser();
-  console.log("🚀 ~ useGetCallsByUser ~ user:", user);
+  const { user, isLoaded: isUserLoaded } = useUser(); // Add isLoaded to check if user is loaded
+  // console.log("🚀 ~ useGetCallsByUser ~ user:", user);
   const [isLoading, setLoading] = useState(false);
   const [callList, setCallList] = useState();
 
   const client = useStreamVideoClient();
 
   useEffect(() => {
-    if (!user) throw new Error("Unauthenticated");
-    if (!client) throw new Error("Client not found");
+    if(!client || !user){
+      return
+    }
     setLoading(true);
     const getCall = async () => {
       try {
@@ -33,9 +34,11 @@ const useGetCallsByUser = () => {
         setLoading(false);
       }
     };
-    getCall();
-  }, [client, setLoading, user]);
-  console.log("🚀 ~ useGetCallsByUser ~ callList:", callList);
+    if(isUserLoaded && client && user){
+      getCall();
+    }
+  }, [client, isUserLoaded, setLoading, user]);
+  // console.log("🚀 ~ useGetCallsByUser ~ callList:", callList);
 
   const now = new Date();
 
@@ -56,3 +59,4 @@ const useGetCallsByUser = () => {
 };
 
 export default useGetCallsByUser;
+

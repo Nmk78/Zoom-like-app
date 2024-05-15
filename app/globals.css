@@ -28,7 +28,8 @@
       --radius: 0.5rem;
 
     }
-  
+
+    
     /* .dark {
       --background: 222.2 84% 4.9%;
       --foreground: 210 40% 98%;
@@ -58,3 +59,73 @@
     animation: spin 2s linear infinite; /* Adjust duration and timing function as needed */
   }
   
+  #content::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+  }
+  
+  /* For Firefox */
+  #content {
+    scrollbar-width: none; /* Hide scrollbar */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+
+
+
+
+/* ////// Custom Scroll Bar */
+
+  /* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(230, 24%, 25%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, rgba(66, 153, 225, 0.4), rgba(72, 187, 120, 0.4));
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent ;
+}
+
+/* Custom Scrollbar for elements */
+.custom-scrollbar {
+  overflow-y: auto;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsla(230, 24%, 25%);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, rgba(66, 153, 225, 0.4), rgba(72, 187, 120, 0.4));
+}
+
+.custom-scrollbar {
+  scrollbar-width:thin;
+  scrollbar-color: transparent hsla(230, 24%, 25%);
+}

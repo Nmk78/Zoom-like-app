@@ -11,9 +11,25 @@ import React, { useState } from "react";
 import { useToast } from "./ui/use-toast";
 import Modal from "./Modal";
 import "../app/globals.css";
+import useGetCallsByUser from "@/hooks/useGetCallsByUser";
+
+export const UpComingMeetingPreview = ({ title, time }) => {
+  return (
+    <div className="border-2 rounded-md border-[#fafafa66
+    ] p-2 w-full mx-3 mt-2">
+      <p id="title" className="text-xl mb-1">
+        {title}
+      </p>
+      <p id="time" className="text-sm">
+        {time}
+      </p>
+    </div>
+  );
+};
 
 export default function Home() {
   const { isLoaded, isSignedIn, user } = useUser();
+  const { scheduled, isLoading } = useGetCallsByUser();
   const router = useRouter();
 
   const currentDate = new Date();
@@ -50,7 +66,7 @@ export default function Home() {
         type={dialogData.type}
         onClose={() => setMeetingType(undefined)}
       />
-      <div className="relative w-full">
+      <div className="relative overflow-hidden w-full ">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-20 rounded-lg"></div>
         <div className="relative bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-lg">
           <h1 className="text-3xl font-bold text-white">
@@ -63,7 +79,7 @@ export default function Home() {
       </div>
       <div
         id="secRow"
-        className="w-full max-w-[1200px] h-3/5 flex items-center justify-center"
+        className="w-full max-w-[1200px] h-3/5 max-h-[65%] flex items-center justify-center"
       >
         <div
           id="quickButton"
@@ -92,7 +108,10 @@ export default function Home() {
             );
           })}
         </div>
-        <div className="relative w-1/2 max-w-[800px] h-full">
+        <div
+          id="contentContainer"
+          className="relative w-1/2 max-w-[800px] h-full"
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-20 rounded-lg"></div>
           <div className="relative bg-white bg-opacity-20 backdrop-blur-md p-6 rounded-t-lg">
             <div className="h-32 text-3xl font-bold text-white">
@@ -110,9 +129,34 @@ export default function Home() {
           </div>
           <div
             id="content"
-            className="w-full h-full flex items-center justify-center"
+            className="w-full h-3/5 flex flex-col px-2 items-center justify-center overflow-scroll overflow-y-scroll"
           >
-            <p className="text-gray-200">No upcoming event.</p>
+            {scheduled && <p className="text-gray-200">Upcoming meetings</p>}
+            {scheduled ? (
+              scheduled
+                .sort(
+                  (a, b) =>
+                    new Date(a.state.startsAt) - new Date(b.state.startsAt)
+                )
+                .slice(0, 3)
+                .map((call, index) => {
+                  return (
+                    <UpComingMeetingPreview
+                      key={index}
+                      title={call?.state?.custom?.title || "Untitled Meeting"}
+                      time={
+                        call?.state?.startsAt
+                          ? new Date(call.state.startsAt).toLocaleString()
+                          : "Unknown Time"
+                      }
+                    />
+                  );
+                })
+            ) : !isLoading ? (
+              <p className="text-gray-200">No upcoming meeting.</p>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

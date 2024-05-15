@@ -41,7 +41,6 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
     title: "",
     dateTime: new Date(),
     description: "",
-    meetingLink: "",
   });
 
   const [joinParam, setJoinParam] = useState(undefined);
@@ -51,7 +50,6 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
   const { useCallEndedAt, useCallStartsAt } = useCallStateHooks();
 
   const [scheduleMeetingDetails, setScheduleMeetingDetails] = useState(call);
-
 
   if (!isLoaded || !isSignedIn) {
     return null;
@@ -81,11 +79,13 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
       const startedAt =
         initialValues.dateTime.toISOString() ||
         new Date(Date.now).toISOString();
-      const description = initialValues.description || "Instant Meeting";
+      const title = initialValues.title || "Instant Meeting";
+      const description = initialValues.description || "";
       await call.getOrCreate({
         data: {
           starts_at: startedAt,
           custom: {
+            title,
             description,
           },
         },
@@ -140,7 +140,6 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
     }
   };
 
-
   const handler = async () => {
     console.log("modal handler run");
     switch (type) {
@@ -182,12 +181,11 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
         </DialogHeader>
         {type == "joiningMeeting" && (
           <div className="text-gray-100">
-            <Label htmlFor="title" className="mb-5">
-              Meeting Link
-            </Label>
+            <Label htmlFor="title">Meeting Link</Label>
             <Input
               type="link"
               id="link"
+              className="mb-5 mt-3"
               onChange={(e) => {
                 setJoinParam(e.target.value);
               }}
@@ -198,15 +196,24 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
           (type === "scheduleMeeting" && !scheduleMeetingDetails)) && (
           <div>
             <div className="text-gray-100">
-              <Label htmlFor="title" className="mb-5">
-                Title
-              </Label>
-              <Input id="Title" />
+              <Label htmlFor="title">Title</Label>
+              <Input
+                id="Title"
+                className="mb-5 mt-3"
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  setInitialValues((prevValues) => ({
+                    ...prevValues,
+                    title: newValue,
+                  }));
+                }}
+              />
             </div>
             <div className="text-gray-100">
               <Label htmlFor="desc">Description</Label>
               <Textarea
                 id="desc"
+                className="mb-5 mt-3"
                 onChange={(e) => {
                   const newValue = e.target.value;
                   setInitialValues((prevValues) => ({
@@ -238,27 +245,6 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
               startDate={Date.now()}
             />
           ))}
-
-        {/* {type == "scheduleMeeting" && (
-          <DatePicker
-            className="bg-secondary text-gray-100 px-4 py-1 rounded-md"
-            selected={initialValues.dateTime}
-            onChange={(date) => {
-              setInitialValues({ ...initialValues, dateTime: date });
-            }}
-            showTimeSelect
-            dateFormat="Pp"
-            timeIntervals={3}
-            timeCaption="time"
-            startDate={Date.now()}
-          />
-        )}
-
-        {type == "scheduleMeeting" && scheduleMeetingDetails && (
-          <div>
-            <DialogDescription>Meeting Created</DialogDescription>
-          </div>
-        )} */}
 
         <Button
           onClick={handler}
