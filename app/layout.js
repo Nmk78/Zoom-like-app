@@ -7,6 +7,11 @@ import SideNav from "@/components/SideNav";
 import { Toaster } from "@/components/ui/toaster";
 import StreamVideoProvider from "@/providers/StreamClientProvider";
 
+export const metadata = {
+  title: "mooZ",
+  description: "A video conferencing website like zoom.",
+};
+
 
 export default function RootLayout({ children }) {
   return (

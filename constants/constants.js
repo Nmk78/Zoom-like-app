@@ -21,7 +21,6 @@ export const tabs = [
     route: "/recordings",
     label: "Recordings",
   },
-
 ];
 
 export const quickButtons = [
