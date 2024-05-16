@@ -7,11 +7,6 @@ export const tabs = [
     label: "Home",
   },
   {
-    icon: "/icons/plus.svg",
-    route: "/personal-room",
-    label: "Personal Room",
-  },
-  {
     icon: "/icons/upcoming.svg",
     route: "/scheduled",
     label: "Scheduled",

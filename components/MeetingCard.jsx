@@ -10,14 +10,38 @@ const MeetingCard = ({ title, description, code, date, start, end, type }) => {
   const router = useRouter();
 
   const handleStart = (code) => {
-    if (!code) return;
+    if (!code) {
+      toast({ title: "Please try again!" });
+      return
+    }
     const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${code}`;
     router.push(meetingLink);
     toast({ title: "Redirecting to meeting" });
   };
   const handleCopy = (code) => {
+    if (!code) {
+      toast({ title: "Please try again!" });
+      return
+    }
     const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${code}`;
     navigator.clipboard.writeText(meetingLink);
+    toast({ title: "Link Copied" });
+  };
+
+  const handlePlay = (code) => {
+    if (!code) {
+      toast({ title: "Please try again!" });
+      return
+    }
+    router.push(code);
+    toast({ title: "Redirecting to meeting" });
+  };
+  const handleShare = (code) => {
+    if (!code) {
+      toast({ title: "Please try again!" });
+      return
+    }
+    navigator.clipboard.writeText(code);
     toast({ title: "Link Copied" });
   };
 
@@ -31,55 +55,62 @@ const MeetingCard = ({ title, description, code, date, start, end, type }) => {
       </div>
       <div id="date">{date}</div>
       {type == "recording" && (
-        <div id="startDateAndEndDate" className="flex justify-start">
+        <div id="startDateAndEndDate" className="flex justify-start gap-10">
           <div id="startAt">Started: {start}</div>
           <div id="endAt">Ended: {end}</div>
         </div>
       )}
-      {type == "upcoming-calls" ||
-        (type == "recording" && (
-          <div className="flex items-center justify-around">
-            {type == "upcoming-calls" && (
-              <p
-                id="meetingId"
-                title="Meeting ID"
-                className=" w-[100px] mt-5 h-full text-center px-3 py-1.5 bg-foreground"
-              >
-                {code}
-              </p>
-            )}
-            <div id="buttons" className="w-full flex justify-end gap-2 mt-5">
-              <Button
-                onClick={() => {
+      {(type == "upcoming-calls" || type == "recording") && (
+        <div className="flex items-center justify-around">
+          {type == "upcoming-calls" && (
+            <p
+              id="meetingId"
+              title="Meeting ID"
+              className=" w-[100px] mt-5 h-full text-center px-3 py-1.5 bg-foreground"
+            >
+              {code}
+            </p>
+          )}
+          <div id="buttons" className="w-full flex justify-end gap-2 mt-5">
+            <Button
+              onClick={() => {
+                if (type == "upcoming-calls") {
                   handleStart(code);
-                }}
-                className="px-4 h-9 rounded-sm text-gray-100"
-              >
-                Start
-              </Button>
-              <Button
-                onClick={() => {
+                } else {
+                  handlePlay(code);
+                }
+              }}
+              className="px-4 h-9 rounded-sm text-gray-100"
+            >
+              {type == "upcoming-calls" ? "Start" : "Play"}
+            </Button>
+            <Button
+              onClick={() => {
+                if (type == "upcoming-calls") {
                   handleCopy(code);
-                }}
-                className="px-4 h-9 gap-1 rounded-sm text-gray-100 bg-foreground hover:bg-background"
-              >
-                {type == "upcoming-call" ? (
-                  <>
-                    <FontAwesomeIcon icon={faCopy} size="xl" color="#e1e1e1" />{" "}
-                    Copy invitation
-                  </>
-                ) : type == "recording" ? (
-                  <>
-                    <FontAwesomeIcon icon={faShare} size="xl" color="#e1e1e1" />
-                    Share
-                  </>
-                ) : (
-                  <></>
-                )}
-              </Button>
-            </div>
+                } else {
+                  handleShare(code);
+                }
+              }}
+              className="px-4 h-9 gap-1 rounded-sm text-gray-100 bg-foreground hover:bg-background"
+            >
+              {type == "upcoming-call" ? (
+                <>
+                  <FontAwesomeIcon icon={faCopy} size="xl" color="#e1e1e1" />{" "}
+                  Copy invitation
+                </>
+              ) : type == "recording" ? (
+                <>
+                  <FontAwesomeIcon icon={faShare} size="xl" color="#e1e1e1" />
+                  Share
+                </>
+              ) : (
+                <></>
+              )}
+            </Button>
           </div>
-        ))}
+        </div>
+      )}
     </div>
   );
 };

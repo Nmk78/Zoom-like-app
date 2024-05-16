@@ -8,8 +8,15 @@ import React, { useEffect, useState } from "react";
 
 const Recordings = () => {
   const { recordings, isLoading } = useGetCallsByUser();
-  // console.log("🚀 ~ Recordings ~ recordings:", recordings);
   const [recordingData, setRecordingData] = useState([]);
+  const startDateOptions = {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+  const endDateOptions = { hour: "numeric", minute: "numeric", hour12: true };
 
   useEffect(() => {
     const fetchRecordings = async () => {
@@ -17,7 +24,6 @@ const Recordings = () => {
         recordings?.map((meeting) => meeting.queryRecordings()) ?? []
       );
       // const callData = await recordings[0].queryRecordings() ?? []
-      console.log("🚀 ~ fetchRecordings ~ callData:", callData)
       const filteredRecordings = callData
         .filter((call) => call.recordings.length > 0)
         .flatMap((call) => call.recordings);
@@ -27,8 +33,6 @@ const Recordings = () => {
 
     fetchRecordings();
   }, [recordings]);
-  console.log("🚀 ~ Recordings ~ recordingData:", recordingData);
-
   return (
     <div className="p-3 w-full h-full overflow-y-scroll">
       <div className="font-bold text-4xl my-[30px]">Meeting Records</div>
@@ -37,12 +41,21 @@ const Recordings = () => {
         className="w-full mx-auto h-auto flex flex-wrap items-center content-start justify-start"
       >
         {isLoading && <Loading />}
-        {recordingData && (
-          recordingData.map((record, index)=>{
-            // console.log(record)
-            return (<MeetingCard key={index} title={record.filename.slice(0,25)}  code={record.url} start={record.start_time.toLocaleString()} end={record.end_time.toLocaleString()} type="recording"/>)
-          })
-        )}
+        {recordingData &&
+          recordingData.map((record, index) => {
+            const startTime = new Date(record.start_time);
+            const endTime = new Date(record.end_time);
+            return (
+              <MeetingCard
+                key={index}
+                title={record.filename.slice(0, 25)}
+                code={record.url}
+                start={startTime.toLocaleString(undefined, startDateOptions)}
+                end={endTime.toLocaleString(undefined, endDateOptions)}
+                type="recording"
+              />
+            );
+          })}
       </div>
     </div>
   );
