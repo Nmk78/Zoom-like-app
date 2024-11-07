@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# mooZ - Video Meeting Application
 
-First, run the development server:
+mooZ is a video meeting application built with Next.js, Shadcn UI, Clerk for authentication, and Stream Video SDK for video call functionality. The application allows users to schedule, join, and manage video meetings. It also supports viewing upcoming meetings, past meetings, and recorded meetings.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   **User Authentication**: Secure authentication using Clerk.
+-   **Video Meetings**: Create, join, and manage video meetings with Stream Video SDK.
+-   **Upcoming Meetings**: View a list of scheduled meetings.
+-   **Past Meetings**: View a list of past meetings.
+-   **Recorded Meetings**: Access and view recorded meetings.
+-   **Responsive Design**: Ensures a great user experience on both desktop and mobile devices.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+### Scheduling a Meeting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Click on the "Schedule Meeting" button.
+2.  Fill in the meeting details such as title, description, and select a date and time.
+3.  Click "Create Meeting" to schedule the meeting. If successful, the meeting link will be copied to the clipboard.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Joining a Meeting
 
-## Deploy on Vercel
+1.  Click on the "Join Meeting" button.
+2.  Enter the meeting code or link.
+3.  Join the meeting.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Viewing Recordings
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1.  Click on the "Recordings" button to view all recorded meetings.
+2.  Click on a recording to view the details and playback.
+
+## Customization
+
+### UI Components
+
+The UI components are styled using Tailwind CSS. You can customize the styles by editing the Tailwind configuration and CSS classes in the components. Used shadcn for some components.
+
+### Modals and Dialogs
+
+Modals are implemented to handle different types of meetings (instant, scheduled, and joining). You can find the modal component and customize its behavior and appearance.
+
+### Custom Hooks
+
+Several custom hooks are used for managing the state and API calls. For example, `useGetCallsByUser` fetches the calls associated with the logged-in user.
+
+## Known Issues
+
+-   Ensure your system clock is accurate to avoid JWT token errors with Clerk.
+    -   This can be fixed by syncing the time in your system settings.
+-   If you encounter any issues with the video SDK, refer to the Stream documentation for troubleshooting.
+
+## Reference
+
+This repository was very helpful for this project: [Zoom Clone](https://github.com/adrianhajdin/zoom-clone)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request or open an issue. This is my refactor and the project name is "mooZ," which is "Zoom" in reverse. Additionally, shadcn is added as a dependency.
