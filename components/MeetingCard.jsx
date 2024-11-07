@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faShare } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 const MeetingCard = ({ title, description, code, date, start, end, type }) => {
   const { toast } = useToast();
   const router = useRouter();
+
+  const [test, settest] = useState("second")
 
   const handleStart = (code) => {
     if (!code) {
