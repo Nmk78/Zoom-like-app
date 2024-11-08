@@ -97,7 +97,7 @@ const SideNav = () => {
   if (isMeetingPage) return null;
 
   return (
-    <aside className="hidden md:block w-[210px] lg:w-[250px] h-full bg-background p-4">
+    <aside className="hidden pt-[7vh] md:block w-[210px] lg:w-[250px] h-full bg-background p-4">
       {tabs.map(({ label, icon, route }, index) => (
         <Tab key={index} label={label} route={route} icon={icon} />
       ))}
