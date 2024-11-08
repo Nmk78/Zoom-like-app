@@ -6,6 +6,7 @@ import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
 
 const MeetingCard = ({ title, description, code, date, start, end, type }) => {
+  console.log("🚀 ~ MeetingCard ~ type:", type)
   const { toast } = useToast();
   const router = useRouter();
 
@@ -96,7 +97,7 @@ const MeetingCard = ({ title, description, code, date, start, end, type }) => {
               }}
               className="px-4 h-9 gap-1 rounded-sm text-gray-100 bg-foreground hover:bg-background"
             >
-              {type == "upcoming-call" ? (
+              {type == "upcoming-calls" ? (
                 <>
                   <FontAwesomeIcon icon={faCopy} size="xl" color="#e1e1e1" />{" "}
                   Copy invitation
