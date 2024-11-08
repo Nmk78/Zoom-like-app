@@ -174,8 +174,8 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose} className="text-gray-100">
-      <DialogContent className="gap-y-5">
+    <Dialog open={isOpen} onOpenChange={onClose} className=" text-gray-100">
+      <DialogContent className="gap-y-5 w-[90%] max-w-96 rounded-md mx-auto md:mx-0">
         <DialogHeader>
           <DialogTitle className="text-gray-100">{title}</DialogTitle>
         </DialogHeader>

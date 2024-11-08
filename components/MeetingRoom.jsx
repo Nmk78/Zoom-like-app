@@ -35,6 +35,7 @@ import {
 import { Button } from "./ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsersViewfinder } from "@fortawesome/free-solid-svg-icons";
+import Modal from "./Modal";
 
 // const MeetingRoom = () => {
 //   const searchParams = useSearchParams();
@@ -179,6 +180,7 @@ const MeetingRoom = () => {
   const [layout, setLayout] = useState("speaker-left");
   const [showParticipants, setShowParticipants] = useState(false);
   const { useCallCallingState, useLocalParticipant } = useCallStateHooks();
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Always call hooks
   const callingState = useCallCallingState();
@@ -208,11 +210,22 @@ const MeetingRoom = () => {
     if (layout !== newLayout) {
       setLayout(newLayout); // This will trigger a re-render with the new layout
     }
-  }
+  };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden pt-4 text-white">
+    <section className="relative h-full w-full overflow-hidden pt-4 text-white">
       {/* Main content */}
+
+      <div className="px-5">
+        <Modal
+          isOpen={modalOpen}
+          title="End call for everyone?"
+          buttonLabel="End"
+          type="endCall"
+          onClose={() => setModalOpen(false)}
+        />
+      </div>
+
       <div className="relative flex size-full items-center justify-center">
         <div className=" flex size-full max-w-[1000px] items-center">
           <CallLayout layout={layout} />
@@ -234,9 +247,20 @@ const MeetingRoom = () => {
       {/* Call controls */}
       <div
         id="controls"
-        className="fixed bottom-0 left-1/2 -translate-x-1/2  flex w-full items-center justify-center gap-5"
+        className="fixed flex-wrap bottom-0 left-1/2 -translate-x-1/2  flex w-full items-center justify-center gap-5"
       >
         <CallControls onLeave={() => router.push(`/`)} />
+
+        {/* End Call button for owner */}
+        {roomOwner && (
+          <Button
+            variant="destructive"
+            className="rounded-3xl"
+            onClick={() => setModalOpen(!modalOpen)}
+          >
+            End call for everyone
+          </Button>
+        )}
         <DropdownMenu>
           <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]">
             <LayoutList size={20} className="text-white" />
@@ -254,18 +278,6 @@ const MeetingRoom = () => {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
-
-        {/* End Call button for owner */}
-        {roomOwner && (
-          <Button
-            variant="destructive"
-            className="rounded-3xl"
-            onClick={() => setModalOpen(!modalOpen)}
-          >
-            End call for everyone
-          </Button>
-        )}
-
         <CallStatsButton />
         <Button
           className="bg-[#19232d] hover:bg-[#4c535b] rounded-3xl"

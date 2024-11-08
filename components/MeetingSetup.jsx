@@ -284,16 +284,16 @@ const MeetingSetup = ({ setMeetingReady }) => {
   }, [call, cameraOpen, micOpen]);
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <VideoPreview
         className="w-full h-full flex items-center justify-center"
         DisabledVideoPreview={DisabledVideoPreview}
         NoCameraPreview={NoCameraPreview}
         StartingCameraPreview={StartingCameraPreview}
       />
-      <div className="mt-3 flex justify-center items-center">
+      <div className="mt-3 flex space-x-2 md:space-x-4 justify-center items-center">
         <Button
-          className={cn("w-20 mx-3 my-1", {
+          className={cn("w-20 my-1", {
             "bg-red-600 hover:bg-red-700": !cameraOpen,
           })}
           onClick={() => setCameraOpen((prev) => !prev)}
@@ -301,7 +301,7 @@ const MeetingSetup = ({ setMeetingReady }) => {
           <FontAwesomeIcon icon={faVideoCamera} size="2x" color="#eaeaea" />
         </Button>
         <Button
-          className={cn("w-20 mx-3 my-1", {
+          className={cn("w-20 my-1", {
             "bg-red-600 hover:bg-red-700": !micOpen,
           })}
           onClick={() => setMicOpen((prev) => !prev)}
@@ -310,7 +310,7 @@ const MeetingSetup = ({ setMeetingReady }) => {
         </Button>
         <Button
           disabled={callTimeNotArrived}
-          className="mx-3 my-1 bg-green-600 hover:bg-green-700"
+          className=" my-1 bg-green-600 hover:bg-green-700"
           onClick={() => {
             call.join();
             setMeetingReady(true);

@@ -434,7 +434,7 @@ export default function Home() {
       />
 
       {/* Welcome Section */}
-      <div className="relative w-[75vw] mx-auto p-6 rounded-lg bg-opacity-20 bg-white backdrop-blur-md text-center overflow-hidden">
+      <div className="relative w-full md:w-[75vw] mx-auto p-6 rounded-lg bg-opacity-20 bg-white backdrop-blur-md text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-20 rounded-lg"></div>
         <h1 className="relative text-2xl md:text-3xl font-bold text-white">
           Hello, {user?.firstName} {user?.lastName}
