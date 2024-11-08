@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import StreamVideoProvider from "@/providers/StreamClientProvider";
 
 export const metadata = {
-  title: "mooZ",
+  title: "nowconnect",
   description: "A video conferencing website like zoom.",
 };
 

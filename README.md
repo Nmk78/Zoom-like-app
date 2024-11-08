@@ -1,7 +1,7 @@
 
-# mooZ - Video Meeting Application
+# nowconnect - Video Meeting Application
 
-mooZ is a video meeting application built with Next.js, Shadcn UI, Clerk for authentication, and Stream Video SDK for video call functionality. The application allows users to schedule, join, and manage video meetings. It also supports viewing upcoming meetings, past meetings, and recorded meetings.
+nowconnect is a video meeting application built with Next.js, Shadcn UI, Clerk for authentication, and Stream Video SDK for video call functionality. The application allows users to schedule, join, and manage video meetings. It also supports viewing upcoming meetings, past meetings, and recorded meetings.
 
 ## Features
 
@@ -56,7 +56,3 @@ Several custom hooks are used for managing the state and API calls. For example,
 ## Reference
 
 This repository was very helpful for this project: [Zoom Clone](https://github.com/adrianhajdin/zoom-clone)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request or open an issue. This is my refactor and the project name is "mooZ," which is "Zoom" in reverse. Additionally, shadcn is added as a dependency.

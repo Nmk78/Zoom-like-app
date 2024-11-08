@@ -49,12 +49,12 @@ const Nav = () => {
         <Image
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          src="/mooz.svg"
-          alt="mooz_logo"
+          src="/nowconnect.svg"
+          alt="nowconnect"
           className="object-contain"
         />
       </Link>
-      <div className="flex items-center gap-4">
+      <div className="flex text-white items-center gap-4">
         <SignedOut>
           <SignInButton />
         </SignedOut>
