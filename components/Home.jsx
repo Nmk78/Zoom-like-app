@@ -321,10 +321,112 @@ export default function Home() {
     //   </div>
     // </div>
 
-    <div className=" h-[95vh] w-full flex flex-col items-center px-4 py-4 gap-y-10 md:gap-y-8">
+    // <div className=" h-[95vh] w-full flex flex-col items-center px-4 py-4 gap-y-10 md:gap-y-8">
+    //   {/* Modal for different meeting types */}
+    //   <Modal
+    //     isOpen={["scheduleMeeting", "joiningMeeting", "instantMeeting"].includes(meetingType)}
+    //     title={dialogData.title}
+    //     buttonLabel={dialogData.buttonLabel}
+    //     type={dialogData.type}
+    //     onClose={() => setMeetingType(undefined)}
+    //   />
+
+    //   {/* Welcome Section */}
+    //   <div className="relative min-w-[80vw] max-w-md mx-auto p-6 rounded-lg bg-opacity-20 bg-white backdrop-blur-md text-center">
+    //     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-20 rounded-lg"></div>
+    //     <h1 className="relative text-2xl md:text-3xl font-bold text-white">
+    //       Hello, {user?.firstName} {user?.lastName}
+    //     </h1>
+    //   </div>
+
+    //   {/* Main Content Section */}
+    //   <div
+    //     id="secRow"
+    //     className="w-full max-w-lg md:max-w-[1100px] md:max-h-[75%] flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8"
+    //   >
+    //     {/* Quick Buttons Grid */}
+    //     <div
+    //       id="quickButton"
+    //       className="grid w-2/5 md:w-1/2 place-items-center max-w-[300px] gap-4 grid-cols-2"
+    //     >
+    //       {quickButtons.map(({ label, icon, handler, buttonLabel, type }) => (
+    //         <QuickButton
+    //           key={label}
+    //           icon={icon}
+    //           label={label}
+    //           handler={() => {
+    //             setMeetingType(type);
+    //             setDialogData({ title: label, type, buttonLabel });
+    //             if (type === "record") router.push("/recordings");
+    //           }}
+    //         />
+    //       ))}
+    //     </div>
+
+    //     {/* Upcoming Meetings and Preview Section */}
+    //     <div
+    //       id="contentContainer"
+    //       className="relative w-3/5 md:mt-20 sm:w-4/5 md:w-2/3 lg:w-1/2 max-w-lg mx-auto"
+    //     >
+    //       {/* Gradient Overlay */}
+    //       <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-30 rounded-lg"></div>
+
+    //       {/* Card for Content Section */}
+    //       <div className="relative bg-white bg-opacity-25 backdrop-blur-lg rounded-lg shadow-lg">
+    //         {/* Header Section with Preview Image */}
+    //         <div className="relative">
+    //           <Image
+    //             src="/preview.jpg"
+    //             alt="preview"
+    //             width={800}
+    //             height={300}
+    //             className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-t-lg"
+    //           />
+    //           <div className="absolute bottom-4 left-4 text-gray-100 text-lg sm:text-xl md:text-2xl font-semibold backdrop-blur-md bg-black/40 px-3 py-1 rounded-md">
+    //             <h1>{formattedTime}</h1>
+    //             <h1>{formattedDate}</h1>
+    //           </div>
+    //         </div>
+
+    //         {/* Upcoming Meetings Content */}
+    //         <div id="content" className="p-6 max-h-96 flex flex-col items-center space-y-4">
+    //           {scheduled && (
+    //             <p className="text-gray-300 text-sm md:text-base font-medium">
+    //               Upcoming Meetings
+    //             </p>
+    //           )}
+    //           {scheduled
+    //             ? scheduled
+    //                 .sort((a, b) => new Date(a.state.startsAt) - new Date(b.state.startsAt))
+    //                 .slice(0, 3)
+    //                 .map((call, index) => (
+    //                   <UpComingMeetingPreview
+    //                     key={index}
+    //                     title={call?.state?.custom?.title || "Untitled Meeting"}
+    //                     time={
+    //                       call?.state?.startsAt
+    //                         ? new Date(call.state.startsAt).toLocaleString()
+    //                         : "Unknown Time"
+    //                     }
+    //                   />
+    //                 ))
+    //             : !isLoading && (
+    //                 <p className="text-gray-300 text-sm">No upcoming meetings.</p>
+    //               )}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+
+    <div className="h-full w-full flex flex-col items-center px-4 py-4 gap-y-10 md:gap-y-8 overflow-hidden">
       {/* Modal for different meeting types */}
       <Modal
-        isOpen={["scheduleMeeting", "joiningMeeting", "instantMeeting"].includes(meetingType)}
+        isOpen={[
+          "scheduleMeeting",
+          "joiningMeeting",
+          "instantMeeting",
+        ].includes(meetingType)}
         title={dialogData.title}
         buttonLabel={dialogData.buttonLabel}
         type={dialogData.type}
@@ -332,7 +434,7 @@ export default function Home() {
       />
 
       {/* Welcome Section */}
-      <div className="relative min-w-[80vw] max-w-md mx-auto p-6 rounded-lg bg-opacity-20 bg-white backdrop-blur-md text-center">
+      <div className="relative w-[75vw] mx-auto p-6 rounded-lg bg-opacity-20 bg-white backdrop-blur-md text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-20 rounded-lg"></div>
         <h1 className="relative text-2xl md:text-3xl font-bold text-white">
           Hello, {user?.firstName} {user?.lastName}
@@ -342,12 +444,12 @@ export default function Home() {
       {/* Main Content Section */}
       <div
         id="secRow"
-        className="w-full max-w-lg md:max-w-[1200px] md:h-3/5 md:max-h-[65%] flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8"
+        className="w-full max-w-full md:max-w-[1100px] flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 overflow-hidden"
       >
         {/* Quick Buttons Grid */}
         <div
           id="quickButton"
-          className="grid w-full md:w-1/2 place-items-center max-w-[300px] gap-4 grid-cols-2"
+          className="grid w-full md:w-1/2 max-w-[300px] place-items-center gap-4 grid-cols-2"
         >
           {quickButtons.map(({ label, icon, handler, buttonLabel, type }) => (
             <QuickButton
@@ -365,57 +467,65 @@ export default function Home() {
 
         {/* Upcoming Meetings and Preview Section */}
         <div
-          id="contentContainer"
-          className="relative w-full md:mt-20 sm:w-4/5 md:w-2/3 lg:w-1/2 max-w-lg mx-auto"
-        >
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-30 rounded-lg"></div>
+  id="contentContainer"
+  className="relative w-full md:w-1/2 max-w-lg mx-auto overflow-hidden"
+>
+  {/* Background Gradient Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-green-400 opacity-30 rounded-lg"></div>
 
-          {/* Card for Content Section */}
-          <div className="relative bg-white bg-opacity-25 backdrop-blur-lg rounded-lg shadow-lg">
-            {/* Header Section with Preview Image */}
-            <div className="relative">
-              <Image
-                src="/preview.jpg"
-                alt="preview"
-                width={800}
-                height={300}
-                className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-t-lg"
-              />
-              <div className="absolute bottom-4 left-4 text-gray-100 text-lg sm:text-xl md:text-2xl font-semibold backdrop-blur-md bg-black/40 px-3 py-1 rounded-md">
-                <h1>{formattedTime}</h1>
-                <h1>{formattedDate}</h1>
-              </div>
-            </div>
+  {/* Main Card Container */}
+  <div className="relative bg-white bg-opacity-25 backdrop-blur-lg rounded-lg shadow-lg">
+    {/* Header Section with Preview Image */}
+    <div className="relative hidden md:block">
+      <Image
+        src="/preview.jpg"
+        alt="preview"
+        width={800}
+        height={300}
+        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-t-lg"
+      />
+      <div className="absolute bottom-4 left-4 text-gray-100 text-lg sm:text-xl md:text-2xl font-semibold backdrop-blur-md bg-black/40 px-3 py-1 rounded-md">
+        <h1>{formattedTime}</h1>
+        <h1>{formattedDate}</h1>
+      </div>
+    </div>
 
-            {/* Upcoming Meetings Content */}
-            <div id="content" className="p-6 max-h-96 flex flex-col items-center space-y-4">
-              {scheduled && (
-                <p className="text-gray-300 text-sm md:text-base font-medium">
-                  Upcoming Meetings
-                </p>
-              )}
-              {scheduled
-                ? scheduled
-                    .sort((a, b) => new Date(a.state.startsAt) - new Date(b.state.startsAt))
-                    .slice(0, 3)
-                    .map((call, index) => (
-                      <UpComingMeetingPreview
-                        key={index}
-                        title={call?.state?.custom?.title || "Untitled Meeting"}
-                        time={
-                          call?.state?.startsAt
-                            ? new Date(call.state.startsAt).toLocaleString()
-                            : "Unknown Time"
-                        }
-                      />
-                    ))
-                : !isLoading && (
-                    <p className="text-gray-300 text-sm">No upcoming meetings.</p>
-                  )}
-            </div>
-          </div>
-        </div>
+    {/* Upcoming Meetings Content */}
+    <div
+      id="content"
+      className="p-6 flex flex-col items-center space-y-2 md:space-y-4"
+    >
+      {scheduled && (
+        <p className="text-gray-300 text-sm md:text-base font-medium">
+          Upcoming Meetings
+        </p>
+      )}
+
+      {/* Scrollable Container for Meetings */}
+      <div className="w-full max-h-40 overflow-y-auto">
+        {scheduled
+          ? scheduled
+              .sort((a, b) => new Date(a.state.startsAt) - new Date(b.state.startsAt))
+              .slice(0, 3)
+              .map((call, index) => (
+                <UpComingMeetingPreview
+                  key={index}
+                  title={call?.state?.custom?.title || "Untitled Meeting"}
+                  time={
+                    call?.state?.startsAt
+                      ? new Date(call.state.startsAt).toLocaleString()
+                      : "Unknown Time"
+                  }
+                />
+              ))
+          : !isLoading && (
+              <p className="text-gray-300 text-sm">No upcoming meetings.</p>
+            )}
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   );
