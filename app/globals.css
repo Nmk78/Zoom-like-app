@@ -117,7 +117,7 @@ html {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: hsla(230, 24%, 25%);
+  background: #30364f;
   border-radius: 10px;
 }
 

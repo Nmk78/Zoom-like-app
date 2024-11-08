@@ -10,6 +10,26 @@ import StreamVideoProvider from "@/providers/StreamClientProvider";
 export const metadata = {
   title: "nowconnect",
   description: "A video conferencing website like zoom.",
+  openGraph: {
+    title: "nowconnect",
+    description: "A video conferencing website like zoom.",
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+    type: "website",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Meeting Preview Image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "nowconnect",
+    description: "A video conferencing website like zoom.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
