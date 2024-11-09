@@ -188,7 +188,7 @@ const MeetingRoom = () => {
   const call = useCall();
 
   // Perform conditional rendering after calling all hooks
-  if (callingState !== CallingState.JOINED) {
+  if (callingState !== CallingState.JOINED && callingState !== CallingState.LEFT) {
     return <Loading />;
   }
 
