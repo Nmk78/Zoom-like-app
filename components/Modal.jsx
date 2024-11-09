@@ -181,7 +181,7 @@ const Modal = ({ isOpen, onClose, title, type, buttonLabel }) => {
         </DialogHeader>
         {type == "joiningMeeting" && (
           <div className="text-gray-100">
-            <Label htmlFor="title">Meeting Link</Label>
+            <Label htmlFor="title">Meeting Link or Code</Label>
             <Input
               type="link"
               id="link"
