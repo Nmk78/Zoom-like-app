@@ -227,7 +227,7 @@ const MeetingRoom = () => {
       </div>
 
       <div className="relative flex size-full items-center justify-center">
-        <div className=" flex size-full max-w-[1000px] items-center">
+        <div className=" flex size-full max-w-[100vw] min-w-[80vw] w-[75vw] h-[80vh] items-center">
           <CallLayout layout={layout} />
         </div>
         <div

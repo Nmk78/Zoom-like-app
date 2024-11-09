@@ -89,7 +89,6 @@
 // };
 // export default Meeting;
 
-
 "use client";
 import { useUser } from "@clerk/nextjs";
 import {
@@ -107,6 +106,8 @@ import { useParams } from "next/navigation";
 import Loading from "./Loading";
 import MeetingRoom from "./MeetingRoom";
 import Link from "next/link";
+import SideNav from "./SideNav";
+import Nav from "./Nav";
 
 const Meeting = ({ params }) => {
   const { id } = useParams();
@@ -132,7 +133,9 @@ const Meeting = ({ params }) => {
         <p className="text-center text-3xl font-bold text-white">
           Call Not Found!
         </p>
-        <Link href="/" className=" mt-2 font-semibold underline">Back</Link>
+        <Link href="/" className=" mt-2 font-semibold underline">
+          Back
+        </Link>
       </div>
     );
   }
@@ -142,7 +145,9 @@ const Meeting = ({ params }) => {
       <StreamCall call={call}>
         <StreamTheme>
           {!meetingReady ? (
-            <MeetingSetup setMeetingReady={setMeetingReady} />
+            <div className=" p-2 md:px-4 md:py-2">
+              <MeetingSetup setMeetingReady={setMeetingReady} />
+            </div>
           ) : (
             <MeetingRoom />
           )}
