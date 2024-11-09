@@ -145,7 +145,7 @@ const Meeting = ({ params }) => {
       <StreamCall call={call}>
         <StreamTheme>
           {!meetingReady ? (
-            <div className=" p-2 md:px-4 md:py-2">
+            <div className=" w-full p-2 md:px-4 md:py-2">
               <MeetingSetup setMeetingReady={setMeetingReady} />
             </div>
           ) : (

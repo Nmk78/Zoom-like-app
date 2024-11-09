@@ -286,7 +286,7 @@ const MeetingSetup = ({ setMeetingReady }) => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <VideoPreview
-        className="w-full h-full flex items-center justify-center"
+        className="w-full max-w-96 md:max-w-max  h-full flex items-center justify-center"
         DisabledVideoPreview={DisabledVideoPreview}
         NoCameraPreview={NoCameraPreview}
         StartingCameraPreview={StartingCameraPreview}
